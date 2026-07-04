@@ -1,0 +1,25 @@
+# Design files
+*.dc.html
+Kikupz\ Landing\ Page.html
+Kikupz\ Splash\ Screen\ v*.png
+Landing\ Page\ v*.html
+Landing\ Page\ v*.dc.html
+Match\ Plan*.html
+match-plan-template.html
+export-src.dc.html
+
+# Support/runtime files (not needed for deployment)
+support.js
+logo-data.js
+
+# Design tool files
+.thumbnail
+screenshots/
+uploads/
+
+# OS files
+.DS_Store
+.env
+.env.local
+node_modules/
+.cache/

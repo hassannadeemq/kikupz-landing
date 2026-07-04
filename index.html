@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kikupz — Matchday Nutrition Planning</title>
+  <meta name="description" content="Fuel Up. Kick Off. Kikupz tells you exactly what to eat and when, from breakfast to the final whistle and beyond.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Barlow', 'Helvetica Neue', Arial, sans-serif; color: #15230f; background: #f4f6f2; line-height: 1.6; }
+
+    @keyframes kkzPulse {
+      0%, 100% { box-shadow: 0 12px 32px rgba(245,130,31,0.42), 0 0 0 0 rgba(245,130,31,0.35); }
+      50% { box-shadow: 0 12px 32px rgba(245,130,31,0.42), 0 0 0 16px rgba(245,130,31,0); }
+    }
+    @keyframes kkzTicker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes kkzFloat {
+      0%, 100% { transform: rotate(2.5deg) translateY(0); }
+      50% { transform: rotate(2.5deg) translateY(-12px); }
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #07200d 0%, #0e3417 50%, #1d5c26 100%);
+      color: #ffffff;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -420px;
+      left: -260px;
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -290px;
+      left: -130px;
+      width: 640px;
+      height: 640px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.045);
+    }
+
+    .hero-motifs {
+      position: absolute;
+      bottom: -90px;
+      right: -160px;
+      opacity: 0.10;
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .hero-motifs div {
+      width: 380px;
+      height: 62px;
+      margin-bottom: 18px;
+      clip-path: polygon(12% 0, 100% 0, 88% 100%, 0% 100%);
+    }
+
+    .hero-motifs .green { background: linear-gradient(90deg, #8BC53F, #4C9A2A); }
+    .hero-motifs .orange { background: linear-gradient(90deg, #F5821F, #E4650E); }
+    .hero-motifs .dark { background: linear-gradient(90deg, #1B5E20, #0d3b12); }
+
+    .hero-container {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 28px 90px;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 28px;
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+      margin-left: -28px;
+      margin-right: -28px;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      height: 42px;
+    }
+
+    .hero-logo img {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .hero-logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .hero-logo-text .accent { color: #8BC53F; }
+
+    .hero-cta-top {
+      display: flex;
+      align-items: center;
+      height: 42px;
+      padding: 0 22px;
+      border-radius: 40px;
+      border: 2px solid rgba(139, 197, 63, 0.6);
+      color: #c9e89a;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .hero-cta-top:hover { background: rgba(139, 197, 63, 0.15); }
+
+    .hero-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 56px;
+      margin-top: 24px;
+    }
+
+    .hero-copy {
+      flex: 1 1 460px;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 40px;
+      background: rgba(139, 197, 63, 0.14);
+      border: 1px solid rgba(139, 197, 63, 0.35);
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8BC53F;
+    }
+
+    .hero-badge-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      color: #c9e89a;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 26px 0 0;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(48px, 7vw, 84px);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 .accent { color: #F5821F; }
+
+    .hero-copy p {
+      margin: 24px 0 0;
+      max-width: 480px;
+      font-size: 20px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-copy strong { color: #ffffff; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 46px;
+      border-radius: 60px;
+      background: linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%);
+      color: #ffffff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      animation: kkzPulse 2.6s ease-in-out infinite;
+    }
+
+    .btn:hover { transform: translateY(-3px) scale(1.03); }
+    .btn:active { transform: translateY(1px) scale(0.98); }
+    .btn-icon { font-size: 24px; }
+
+    .hero-copy .btn { margin-top: 38px; }
+
+    .hero-copy .subtext {
+      margin-top: 20px;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .hero-image {
+      flex: 0 1 360px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      width: 330px;
+      filter: drop-shadow(0 36px 46px rgba(0, 0, 0, 0.55));
+      animation: kkzFloat 5s ease-in-out infinite;
+    }
+
+    /* ========== TICKER ========== */
+    .ticker {
+      background: #F5821F;
+      overflow: hidden;
+      padding: 14px 0;
+      white-space: nowrap;
+    }
+
+    .ticker-inner {
+      display: inline-flex;
+      animation: kkzTicker 22s linear infinite;
+    }
+
+    .ticker-content {
+      display: inline-flex;
+      gap: 38px;
+      padding-right: 38px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .ticker-dot { opacity: 0.55; }
+
+    /* ========== HOW IT WORKS ========== */
+    .how-it-works {
+      position: relative;
+      overflow: hidden;
+      background: #0b1a0e;
+      color: #ffffff;
+    }
+
+    .how-it-works::before {
+      content: '';
+      position: absolute;
+      top: -360px;
+      right: -300px;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .how-it-works-container {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 84px 28px 90px;
+    }
+
+    .section-header {
+      text-align: center;
+    }
+
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .how-it-works .section-label { color: #8BC53F; }
+
+    h2 {
+      margin: 10px 0 0;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(30px, 4.5vw, 42px);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .how-it-works h2 { color: #ffffff; }
+
+    .section-header p {
+      margin: 14px auto 0;
+      max-width: 540px;
+      font-size: 18px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .steps {
+      margin-top: 56px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 44px 36px;
+    }
+
+    .step {
+      flex: 0 1 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .step:nth-child(2) { margin-top: 34px; }
+    .step:nth-child(3) { margin-top: 68px; }
+
+    .step img {
+      width: 280px;
+      filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.5));
+    }
+
+    .step:nth-child(2) img { transform: scale(1.06); }
+
+    .step-number {
+      margin-top: 26px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-family: 'Oswald', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step:nth-child(1) .step-badge { background: #8BC53F; color: #0e3417; }
+    .step:nth-child(2) .step-badge { background: #F5821F; color: #ffffff; }
+    .step:nth-child(3) .step-badge { background: #8BC53F; color: #0e3417; }
+
+    .step-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .step-desc {
+      margin: 10px 0 0;
+      max-width: 280px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .how-it-works-cta {
+      margin-top: 64px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-secondary {
+      padding: 20px 44px;
+      font-size: 20px;
+      box-shadow: 0 12px 32px rgba(245, 130, 31, 0.42);
+    }
+
+    /* ========== WHAT YOU GET ========== */
+    .what-you-get {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 80px 28px 30px;
+    }
+
+    .what-you-get .section-label { color: #4C9A2A; }
+    .what-you-get h2 { color: #15230f; }
+
+    .plans {
+      margin-top: 44px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .plan {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(21, 35, 15, 0.08);
+    }
+
+    .plan-header {
+      padding: 24px 28px;
+      color: #ffffff;
+    }
+
+    .plan:nth-child(1) .plan-header { background: linear-gradient(135deg, #0e3417, #1d5c26); }
+    .plan:nth-child(2) .plan-header { background: linear-gradient(135deg, #E4650E, #F5821F); }
+
+    .plan-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .plan:nth-child(1) .plan-label { color: #9ed15c; }
+    .plan:nth-child(2) .plan-label { color: #ffe3c7; }
+
+    .plan-title {
+      margin-top: 4px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .plan-body {
+      padding: 26px 28px 30px;
+    }
+
+    .plan-body p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.6;
+      color: #4b5a44;
+    }
+
+    .plan-body strong { color: #15230f; }
+
+    .plan-tags {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 7px 14px;
+      border-radius: 24px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .plan:nth-child(1) .tag { background: #eef5e4; color: #33691e; }
+    .plan:nth-child(2) .tag { background: #fdeede; color: #b34e08; }
+
+    .what-you-get-note {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 16px;
+      color: #4b5a44;
+    }
+
+    .what-you-get-note strong { color: #15230f; }
+
+    /* ========== TRUST ========== */
+    .trust {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 56px 28px 20px;
+    }
+
+    .trust-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 44px 38px;
+      box-shadow: 0 2px 12px rgba(21, 35, 15, 0.07);
+      text-align: center;
+    }
+
+    .trust-quote {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: 0.5px;
+      color: #15230f;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .trust-credit {
+      margin-top: 14px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: #4C9A2A;
+      text-transform: uppercase;
+    }
+
+    .trust-points {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 44px;
+    }
+
+    .trust-point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .trust-point-icon {
+      width: 10px;
+      height: 10px;
+      clip-path: polygon(12% 0, 100% 0, 88% 100%, 0% 100%);
+    }
+
+    .trust-point:nth-child(1) .trust-point-icon { background: #8BC53F; }
+    .trust-point:nth-child(2) .trust-point-icon { background: #F5821F; }
+    .trust-point:nth-child(3) .trust-point-icon { background: #1B5E20; }
+
+    .trust-point-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #15230f;
+    }
+
+    /* ========== FINAL CTA ========== */
+    .final-cta {
+      margin-top: 64px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(165deg, #0e3417 0%, #07200d 100%);
+      color: #ffffff;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      bottom: -300px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .final-cta-content {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 74px 28px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .final-cta-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .final-cta h2 {
+      margin: 26px 0 0;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .final-cta .btn { margin-top: 34px; }
+
+    .final-cta-footer {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .final-cta-divider {
+      width: 36px;
+      height: 2px;
+      background: rgba(139, 197, 63, 0.45);
+    }
+
+    .final-cta-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      color: #9ed15c;
+      text-transform: uppercase;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .hero-top { flex-direction: column; padding: 16px 28px 0; }
+      .hero-cta-top { order: -1; }
+      .hero-content { gap: 36px; }
+      .hero-copy { align-items: center; text-align: center; }
+      .hero-image img { width: 100%; max-width: 300px; }
+      .steps { gap: 28px 24px; }
+      .step { flex: 0 1 100%; max-width: 320px; }
+      .step:nth-child(2) { margin-top: 0; }
+      .step:nth-child(3) { margin-top: 0; }
+      .plans { grid-template-columns: 1fr; }
+      .trust-points { gap: 12px 24px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-motifs">
+    <div class="green"></div>
+    <div class="orange"></div>
+    <div class="dark"></div>
+  </div>
+
+  <div class="hero-top">
+    <div class="hero-logo">
+      <img src="assets/kikupz-icon.webp" alt="Kikupz">
+      <div class="hero-logo-text">Kikup<span class="accent">z</span></div>
+    </div>
+    <a href="https://kikupz.glide.page" class="hero-cta-top">Open the app</a>
+  </div>
+
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-copy">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <div class="hero-badge-text">Free · No sign-up · 30 seconds</div>
+        </div>
+
+        <h1>Fuel Up.<br><span class="accent">Kick Off.</span></h1>
+
+        <p>Enter your kick-off time and your child's age group — Kikupz tells you <strong>exactly what to eat and exactly when</strong>, from breakfast to the final whistle and beyond.</p>
+
+        <a href="https://kikupz.glide.page" class="btn">
+          <span>Get My Match Plan</span>
+          <span class="btn-icon">→</span>
+        </a>
+
+        <div class="subtext">Built for grassroots parents & coaches. Nothing to install.</div>
+      </div>
+
+      <div class="hero-image">
+        <img src="assets/app-2-cut.png" alt="Kikupz app — My Match Plan screen">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TICKER ========== -->
+<section class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-content">
+      <span>Fuel up</span><span class="ticker-dot">◆</span><span>Kick off</span><span class="ticker-dot">◆</span><span>Recover</span><span class="ticker-dot">◆</span><span>Timed to your kick-off</span><span class="ticker-dot">◆</span><span>U7 to U18</span><span class="ticker-dot">◆</span><span>Free to use</span><span class="ticker-dot">◆</span>
+    </div>
+    <div class="ticker-content">
+      <span>Fuel up</span><span class="ticker-dot">◆</span><span>Kick off</span><span class="ticker-dot">◆</span><span>Recover</span><span class="ticker-dot">◆</span><span>Timed to your kick-off</span><span class="ticker-dot">◆</span><span>U7 to U18</span><span class="ticker-dot">◆</span><span>Free to use</span><span class="ticker-dot">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="how-it-works">
+  <div class="how-it-works-container">
+    <div class="section-header">
+      <div class="section-label">How it works</div>
+      <h2>Three taps in the app</h2>
+      <p>This is the real thing — straight from the Kikupz app.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <img src="assets/app-1-cut.png" alt="Step 1 — enter kick-off time, age group and diet">
+        <div class="step-number">
+          <div class="step-badge">1</div>
+          <div class="step-title">Enter your details</div>
+        </div>
+        <p class="step-desc">Kick-off time, age group and dietary preference. That's all it asks.</p>
+      </div>
+
+      <div class="step">
+        <img src="assets/app-2-cut.png" alt="Step 2 — your Match Fuel Plan, timed around kick-off">
+        <div class="step-number">
+          <div class="step-badge">2</div>
+          <div class="step-title">Get your Match Plan</div>
+        </div>
+        <p class="step-desc">Breakfast, light snack and final prep — real foods, timed to the minute around your kick-off.</p>
+      </div>
+
+      <div class="step">
+        <img src="assets/app-3-cut.png" alt="Step 3 — recovery plan and PDF download">
+        <div class="step-number">
+          <div class="step-badge">3</div>
+          <div class="step-title">Recover & keep it</div>
+        </div>
+        <p class="step-desc">Post-match refuel windows — plus the whole plan emailed to you as a PDF for the touchline.</p>
+      </div>
+    </div>
+
+    <div class="how-it-works-cta">
+      <a href="https://kikupz.glide.page" class="btn btn-secondary">
+        <span>Try it in the app</span>
+        <span class="btn-icon">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT YOU GET ========== -->
+<section class="what-you-get">
+  <div class="section-header">
+    <div class="section-label">What you get</div>
+    <h2>Two plans, one kick-off</h2>
+  </div>
+
+  <div class="plans">
+    <div class="plan">
+      <div class="plan-header">
+        <div class="plan-label">Before kick-off</div>
+        <div class="plan-title">Match Fuel Plan</div>
+      </div>
+      <div class="plan-body">
+        <p>Breakfast, light snack and final prep — each timed back from kick-off, each with <strong>three simple food options</strong> from a normal kitchen. No macros, no weighing, no guesswork.</p>
+        <div class="plan-tags">
+          <div class="tag">Breakfast</div>
+          <div class="tag">Light snack</div>
+          <div class="tag">Final prep</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan">
+      <div class="plan-header">
+        <div class="plan-label">After the match</div>
+        <div class="plan-title">Recovery</div>
+      </div>
+      <div class="plan-body">
+        <p>The two windows that matter after full-time: what to get into them <strong>within 30 minutes</strong>, and the proper meal <strong>within 2 hours</strong> so they're ready for training on Tuesday.</p>
+        <div class="plan-tags">
+          <div class="tag">Within 30 mins</div>
+          <div class="tag">Within 2 hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="what-you-get-note">Plus: email yourself the whole plan as a <strong>PDF</strong> — stick it on the fridge or take it to the touchline.</div>
+</section>
+
+<!-- ========== TRUST ========== -->
+<section class="trust">
+  <div class="trust-card">
+    <div class="trust-quote">"Half my squad used to turn up on a bag of sweets and a fizzy drink. Kikupz is the team-sheet for breakfast."</div>
+    <div class="trust-credit">Built by a grassroots football coach</div>
+
+    <div class="trust-points">
+      <div class="trust-point">
+        <div class="trust-point-icon"></div>
+        <div class="trust-point-text">Timings from sports-nutrition science</div>
+      </div>
+      <div class="trust-point">
+        <div class="trust-point-icon"></div>
+        <div class="trust-point-text">Age-specific, U7 to U18</div>
+      </div>
+      <div class="trust-point">
+        <div class="trust-point-icon"></div>
+        <div class="trust-point-text">Completely free · no sign-up</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL CTA ========== -->
+<section class="final-cta">
+  <div class="final-cta-content">
+    <img src="assets/kikupz-icon.webp" alt="Kikupz" class="final-cta-icon">
+    <h2>Next match sorted<br>in 30 seconds</h2>
+    <a href="https://kikupz.glide.page" class="btn">
+      <span>Get My Match Plan</span>
+      <span class="btn-icon">→</span>
+    </a>
+    <div class="final-cta-footer">
+      <div class="final-cta-divider"></div>
+      <div class="final-cta-label">Kikupz · Matchday Nutrition</div>
+      <div class="final-cta-divider"></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
