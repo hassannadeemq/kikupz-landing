@@ -19,66 +19,51 @@
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
     }
-    @keyframes kkzFloat {
-      0%, 100% { transform: rotate(2.5deg) translateY(0); }
-      50% { transform: rotate(2.5deg) translateY(-12px); }
-    }
-
     /* ========== HERO ========== */
     .hero {
       position: relative;
       overflow: hidden;
-      background: linear-gradient(160deg, #07200d 0%, #0e3417 50%, #1d5c26 100%);
+      background: #07200d;
       color: #ffffff;
     }
 
-    .hero::before {
-      content: '';
+    /* full-bleed footballer / stadium band */
+    .hero-band {
       position: absolute;
-      top: -420px;
-      left: -260px;
-      width: 900px;
-      height: 900px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.06);
+      inset: 0;
+      background-image: url('assets/hero-band.png');
+      background-size: cover;
+      background-position: 62% 30%;
+      background-repeat: no-repeat;
     }
 
-    .hero::after {
-      content: '';
+    /* warm floodlight bloom lift */
+    .hero-bloom {
       position: absolute;
-      top: -290px;
-      left: -130px;
-      width: 640px;
-      height: 640px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.045);
+      inset: 0;
+      background: radial-gradient(120% 90% at 78% 12%, rgba(255, 214, 140, 0.28) 0%, rgba(255, 214, 140, 0) 46%);
     }
 
-    .hero-motifs {
+    /* green scrim: rich on the left for copy legibility, clearing over the player on the right */
+    .hero-scrim {
       position: absolute;
-      bottom: -90px;
-      right: -160px;
-      opacity: 0.10;
-      transform: rotate(-8deg);
-      pointer-events: none;
+      inset: 0;
+      background: linear-gradient(96deg, rgba(4, 17, 8, 0.95) 0%, rgba(6, 26, 12, 0.88) 26%, rgba(7, 32, 13, 0.60) 46%, rgba(7, 32, 13, 0.20) 66%, rgba(7, 32, 13, 0.08) 100%);
     }
 
-    .hero-motifs div {
-      width: 380px;
-      height: 62px;
-      margin-bottom: 18px;
-      clip-path: polygon(12% 0, 100% 0, 88% 100%, 0% 100%);
+    /* top + bottom fades to seat the band */
+    .hero-fade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(3, 15, 6, 0.72) 0%, rgba(3, 15, 6, 0.10) 20%, rgba(3, 15, 6, 0) 55%, rgba(4, 17, 8, 0.55) 84%, rgba(4, 17, 8, 0.92) 100%);
     }
-
-    .hero-motifs .green { background: linear-gradient(90deg, #8BC53F, #4C9A2A); }
-    .hero-motifs .orange { background: linear-gradient(90deg, #F5821F, #E4650E); }
-    .hero-motifs .dark { background: linear-gradient(90deg, #1B5E20, #0d3b12); }
 
     .hero-container {
       position: relative;
       max-width: 1120px;
       margin: 0 auto;
-      padding: 56px 28px 90px;
+      min-height: min(80vh, 760px);
+      padding: 44px 28px 132px;
     }
 
     .hero-top {
@@ -142,13 +127,13 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 56px;
       margin-top: 24px;
     }
 
     .hero-copy {
-      flex: 1 1 460px;
+      flex: 0 1 560px;
       max-width: 560px;
       display: flex;
       flex-direction: column;
@@ -233,18 +218,6 @@
       margin-top: 20px;
       font-size: 15px;
       color: rgba(255, 255, 255, 0.55);
-    }
-
-    .hero-image {
-      flex: 0 1 360px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .hero-image img {
-      width: 330px;
-      filter: drop-shadow(0 36px 46px rgba(0, 0, 0, 0.55));
-      animation: kkzFloat 5s ease-in-out infinite;
     }
 
     /* ========== TICKER ========== */
@@ -647,7 +620,6 @@
       .hero-cta-top { order: -1; }
       .hero-content { gap: 36px; }
       .hero-copy { align-items: center; text-align: center; }
-      .hero-image img { width: 100%; max-width: 300px; }
       .steps { gap: 28px 24px; }
       .step { flex: 0 1 100%; max-width: 320px; }
       .step:nth-child(2) { margin-top: 0; }
@@ -661,11 +633,10 @@
 
 <!-- ========== HERO ========== -->
 <section class="hero">
-  <div class="hero-motifs">
-    <div class="green"></div>
-    <div class="orange"></div>
-    <div class="dark"></div>
-  </div>
+  <div class="hero-band"></div>
+  <div class="hero-bloom"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-fade"></div>
 
   <div class="hero-top">
     <div class="hero-logo">
@@ -693,10 +664,6 @@
         </a>
 
         <div class="subtext">Built for grassroots parents & coaches. Nothing to install.</div>
-      </div>
-
-      <div class="hero-image">
-        <img src="assets/app-2-cut.png" alt="Kikupz app — My Match Plan screen">
       </div>
     </div>
   </div>
@@ -790,7 +757,7 @@
         <div class="plan-title">Recovery</div>
       </div>
       <div class="plan-body">
-        <p>The two windows that matter after full-time: what to get into them <strong>within 30 minutes</strong>, and the proper meal <strong>within 2 hours</strong> so they're ready for training on Tuesday.</p>
+        <p>The two windows that matter after full-time: the quick refuel <strong>within 30 minutes</strong>, then the proper meal <strong>within 2 hours</strong> — so they bounce back ready for the next session.</p>
         <div class="plan-tags">
           <div class="tag">Within 30 mins</div>
           <div class="tag">Within 2 hours</div>
