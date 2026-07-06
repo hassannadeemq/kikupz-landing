@@ -8,8 +8,8 @@ Match\ Plan*.html
 match-plan-template.html
 export-src.dc.html
 
-# Support/runtime files (not needed for deployment)
-support.js
+# Support/runtime files
+# support.js IS required by the deployed v3 landing page (index.html renders via it)
 logo-data.js
 
 # Design tool files
