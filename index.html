@@ -30,6 +30,11 @@
       45% { opacity: 0.78; }
       70% { opacity: 0.96; }
     }
+    /* Mobile only: reframe the hero photo so the player + ball stay in view.
+       Desktop keeps its inline 65% center (this rule doesn't apply above 768px). */
+    @media (max-width: 768px) {
+      .kkz-hero-bg { background-position: 78% center !important; }
+    }
   </style>
 <template id="__bundler_thumbnail">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -55,14 +60,17 @@
   <!-- ============ HERO ============ -->
   <div style="position:relative; overflow:hidden; background:#07200d; color:#ffffff;">
 
-    <!-- footballer / stadium floodlights (text-free band) -->
-    <div style="position:absolute; inset:0; background-image:url('assets/hero-band.png'); background-size:cover; background-position:62% 30%; background-repeat:no-repeat;"></div>
+    <!-- footballer / stadium floodlights -->
+    <div class="kkz-hero-bg" style="position:absolute; inset:0; background-image:url('assets/hero-new.jpg'); background-size:cover; background-position:65% center; background-repeat:no-repeat;"></div>
     <!-- warm floodlight bloom lift -->
     <div style="position:absolute; inset:0; background:radial-gradient(120% 90% at 78% 12%, rgba(255,214,140,0.28) 0%, rgba(255,214,140,0) 46%);"></div>
     <!-- green scrim: rich on the left for copy legibility, clearing over the player on the right -->
     <div style="position:absolute; inset:0; background:linear-gradient(96deg, rgba(4,17,8,0.95) 0%, rgba(6,26,12,0.88) 26%, rgba(7,32,13,0.60) 46%, rgba(7,32,13,0.20) 66%, rgba(7,32,13,0.08) 100%);"></div>
     <!-- top + bottom fades to seat the band -->
     <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(3,15,6,0.72) 0%, rgba(3,15,6,0.10) 20%, rgba(3,15,6,0) 55%, rgba(4,17,8,0.55) 84%, rgba(4,17,8,0.92) 100%);"></div>
+
+    <!-- evidence badge — bottom-right of the hero, visible immediately -->
+    <img src="assets/evidence-badge.png" alt="Built using evidence-based sports nutrition guidance" style="position:absolute; right:24px; bottom:24px; z-index:2; width:clamp(84px, 12vw, 116px); height:auto; filter:drop-shadow(0 6px 16px rgba(0,0,0,0.4));">
 
     <!-- top bar -->
     <div style="position:relative; max-width:1120px; margin:0 auto; padding:22px 28px 0; display:flex; align-items:center; justify-content:space-between; gap:16px;">
@@ -92,9 +100,9 @@
         <div style="margin-top:38px;">
           <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
             <div style="display:flex; flex-direction:column; align-items:flex-start; gap:18px;">
-              <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:14px; padding:22px 46px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
+              <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:12px; padding:16px 36px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:18px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
                 <span>{{ ctaLabel }}</span>
-                <span style="font-size:24px; line-height:1;">&#8594;</span>
+                <span style="font-size:20px; line-height:1;">&#8594;</span>
               </a>
               <div style="font-size:15px; color:rgba(255,255,255,0.55);">Built for grassroots parents &amp; coaches. Nothing to install.</div>
             </div>
@@ -256,7 +264,6 @@
   <!-- ============ TRUST ============ -->
   <div style="max-width:1120px; margin:0 auto; padding:56px 28px 20px;">
     <div style="background:#ffffff; border-radius:22px; padding:44px 38px; box-shadow:0 2px 12px rgba(21,35,15,0.07); text-align:center;">
-      <img src="assets/evidence-badge.png" alt="Built using evidence-based sports nutrition guidance" style="width:132px; height:132px; display:block; margin:0 auto 24px; filter:drop-shadow(0 6px 16px rgba(21,35,15,0.15));">
       <div style="font-family:'Oswald',sans-serif; font-size:clamp(22px, 3vw, 30px); font-weight:600; line-height:1.35; letter-spacing:0.5px; color:#15230f; max-width:720px; margin:0 auto;">"Half my squad used to turn up on a bag of sweets and a fizzy drink. Kikupz is the team-sheet for breakfast."</div>
       <div style="margin-top:14px; font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:3px; color:#4C9A2A; text-transform:uppercase;">Built by a grassroots football coach</div>
       <div style="margin-top:30px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 44px;">
@@ -284,9 +291,9 @@
       <h2 style="margin:26px 0 0; font-family:'Oswald',sans-serif; font-size:clamp(30px, 5vw, 46px); font-weight:600; letter-spacing:1px; line-height:1.1; text-transform:uppercase;">Next match sorted<br>in 30 seconds</h2>
       <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
         <div style="margin-top:34px; display:flex; flex-direction:column; align-items:center; gap:18px;">
-          <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:14px; padding:22px 46px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
+          <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:12px; padding:16px 36px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:18px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
             <span>{{ ctaLabel }}</span>
-            <span style="font-size:24px; line-height:1;">&#8594;</span>
+            <span style="font-size:20px; line-height:1;">&#8594;</span>
           </a>
         </div>
       </sc-if>
