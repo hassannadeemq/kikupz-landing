@@ -70,11 +70,13 @@
         <img src="assets/kikupz-icon.webp" alt="Kikupz" style="width:42px; height:42px; border-radius:10px;">
         <div style="font-family:'Oswald',sans-serif; font-size:22px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;">Kikup<span style="color:#8BC53F;">z</span></div>
       </div>
-      <a href="{{ appUrl }}" style="padding:10px 22px; border-radius:40px; border:2px solid rgba(139,197,63,0.6); color:#c9e89a; font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:background 0.15s ease;" style-hover="background:rgba(139,197,63,0.15);">Open the app</a>
+      <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
+        <a href="{{ appUrl }}" style="padding:10px 22px; border-radius:40px; border:2px solid rgba(139,197,63,0.6); color:#c9e89a; font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:background 0.15s ease;" style-hover="background:rgba(139,197,63,0.15);">Open the app</a>
+      </sc-if>
     </div>
 
     <!-- hero content -->
-    <div style="position:relative; max-width:1120px; margin:0 auto; min-height:min(80vh, 760px); padding:44px 28px 132px; display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap:56px;">
+    <div style="position:relative; max-width:1120px; margin:0 auto; min-height:min(80vh, 760px); padding:44px 28px 64px; display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap:56px;">
 
       <!-- copy -->
       <div style="flex:0 1 560px; max-width:560px; display:flex; flex-direction:column; align-items:flex-start;">
@@ -85,35 +87,64 @@
 
         <h1 style="margin:26px 0 0; font-family:'Oswald',sans-serif; font-size:clamp(48px, 7vw, 84px); font-weight:700; line-height:0.98; letter-spacing:1px; text-transform:uppercase;">Fuel Up.<br><span style="color:#F5821F;">Kick Off.</span></h1>
 
-        <p style="margin:24px 0 0; max-width:480px; font-size:20px; line-height:1.55; color:rgba(255,255,255,0.85);">Enter your kick-off time and your child's age group — Kikupz tells you <strong style="color:#ffffff;">exactly what to eat and exactly when</strong>, from breakfast to the final whistle and beyond.</p>
+        <p style="margin:24px 0 0; max-width:500px; font-size:20px; line-height:1.55; color:rgba(255,255,255,0.85);">Personalised matchday nutrition plans for young footballers — built in seconds from your <strong style="color:#ffffff;">kick-off time, age group and dietary requirements</strong>.</p>
 
-        <div style="margin-top:38px; display:flex; flex-wrap:wrap; align-items:center; gap:24px 26px;">
-          <div style="display:flex; flex-direction:column; align-items:flex-start;">
-            <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:14px; padding:22px 46px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
-              <span>{{ ctaLabel }}</span>
-              <span style="font-size:24px; line-height:1;">&#8594;</span>
-            </a>
-            <div style="margin-top:16px; font-size:15px; color:rgba(255,255,255,0.55);">Built for grassroots parents &amp; coaches. Nothing to install.</div>
-          </div>
-
-          <!-- OR divider -->
-          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-            <div style="width:2px; height:22px; background:rgba(255,255,255,0.18);"></div>
-            <div style="font-family:'Oswald',sans-serif; font-size:13px; font-weight:600; letter-spacing:3px; color:rgba(255,255,255,0.5); text-transform:uppercase;">or</div>
-            <div style="width:2px; height:22px; background:rgba(255,255,255,0.18);"></div>
-          </div>
-
-          <!-- QR ticket -->
-          <div style="position:relative; display:flex; align-items:center; gap:16px; padding:16px 22px 16px 16px; border-radius:20px; background:#ffffff; box-shadow:0 20px 50px rgba(0,0,0,0.4); transform:rotate(2deg); transition:transform 0.2s ease;" style-hover="transform:rotate(0deg) scale(1.03);">
-            <div style="position:absolute; top:-13px; left:20px; padding:5px 14px; border-radius:20px; background:#8BC53F; color:#0e3417; font-family:'Oswald',sans-serif; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Scan me</div>
-            <div style="width:122px; height:122px; flex:none;"><img src="assets/qr.png" alt="Scan to open Kikupz" style="width:100%; height:100%; display:block;"></div>
-            <div style="display:flex; flex-direction:column; gap:6px; max-width:136px;">
-              <div style="font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; letter-spacing:1px; line-height:1.2; text-transform:uppercase; color:#0e3417;">Get it on your phone</div>
-              <div style="font-size:13px; line-height:1.45; color:#4b5a44;">Point your camera here. No app store, no install.</div>
+        <div style="margin-top:38px;">
+          <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; align-items:flex-start; gap:18px;">
+              <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:14px; padding:22px 46px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
+                <span>{{ ctaLabel }}</span>
+                <span style="font-size:24px; line-height:1;">&#8594;</span>
+              </a>
+              <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:12px; padding:16px 38px; border-radius:60px; border:2px solid rgba(139,197,63,0.7); color:#c9e89a; font-family:'Oswald',sans-serif; font-size:18px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:background 0.15s ease;" style-hover="background:rgba(139,197,63,0.15);">Open App</a>
+              <div style="font-size:15px; color:rgba(255,255,255,0.55);">Built for grassroots parents &amp; coaches. Nothing to install.</div>
             </div>
-          </div>
+          </sc-if>
+          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ false }}">
+            <div style="position:relative; display:inline-flex; flex-direction:column; align-items:center; gap:16px; padding:30px 32px 26px; border-radius:24px; background:#ffffff; box-shadow:0 20px 50px rgba(0,0,0,0.4);">
+              <div style="position:absolute; top:-14px; left:28px; padding:5px 14px; border-radius:20px; background:#8BC53F; color:#0e3417; font-family:'Oswald',sans-serif; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Scan me</div>
+              <div style="width:224px; height:224px;"><img src="assets/qr.png" alt="Scan to open Kikupz" style="width:100%; height:100%; display:block;"></div>
+              <div style="max-width:250px; text-align:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; letter-spacing:1px; line-height:1.45; text-transform:uppercase; color:#0e3417;">Scan the QR code to open Kikupz on your phone</div>
+            </div>
+          </sc-if>
         </div>
       </div>
+    </div>
+
+  </div>
+
+  <!-- ============ FEATURE STRIP (own band, off the photo) ============ -->
+  <div style="position:relative; background:#0e3417; padding:44px 28px;">
+    <div style="max-width:1120px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:0;">
+
+      <div style="display:flex; align-items:center; gap:16px; padding:16px 26px; border-right:1px solid rgba(255,255,255,0.12);">
+        <div style="flex:none; width:48px; height:48px; border-radius:50%; background:rgba(139,197,63,0.14); display:flex; align-items:center; justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8BC53F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        </div>
+        <div style="font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:1.5px; line-height:1.4; text-transform:uppercase; color:#ffffff;">U7&ndash;U18<br>players</div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:16px; padding:16px 26px; border-right:1px solid rgba(255,255,255,0.12);">
+        <div style="flex:none; width:48px; height:48px; border-radius:50%; background:rgba(139,197,63,0.14); display:flex; align-items:center; justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8BC53F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+        </div>
+        <div style="font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:1.5px; line-height:1.4; text-transform:uppercase; color:#ffffff;">Veg, dairy-free &amp;<br>gluten-free options</div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:16px; padding:16px 26px; border-right:1px solid rgba(255,255,255,0.12);">
+        <div style="flex:none; width:48px; height:48px; border-radius:50%; background:rgba(139,197,63,0.14); display:flex; align-items:center; justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8BC53F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div style="font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:1.5px; line-height:1.4; text-transform:uppercase; color:#ffffff;">Personalised in<br>under 30 seconds</div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:16px; padding:16px 26px;">
+        <div style="flex:none; width:48px; height:48px; border-radius:50%; background:rgba(139,197,63,0.14); display:flex; align-items:center; justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8BC53F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+        </div>
+        <div style="font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:1.5px; line-height:1.4; text-transform:uppercase; color:#ffffff;">More energy,<br>better recovery</div>
+      </div>
+
     </div>
   </div>
 
@@ -172,12 +203,14 @@
         </div>
       </div>
 
-      <div style="margin-top:64px; display:flex; justify-content:center;">
-        <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:14px; padding:20px 44px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:20px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; box-shadow:0 12px 32px rgba(245,130,31,0.42); transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
-          <span>Try it in the app</span>
-          <span style="font-size:24px; line-height:1;">&#8594;</span>
-        </a>
-      </div>
+      <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:64px; display:flex; justify-content:center;">
+          <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:14px; padding:20px 44px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:20px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; box-shadow:0 12px 32px rgba(245,130,31,0.42); transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
+            <span>Try it in the app</span>
+            <span style="font-size:24px; line-height:1;">&#8594;</span>
+          </a>
+        </div>
+      </sc-if>
     </div>
   </div>
 
@@ -224,6 +257,7 @@
   <!-- ============ TRUST ============ -->
   <div style="max-width:1120px; margin:0 auto; padding:56px 28px 20px;">
     <div style="background:#ffffff; border-radius:22px; padding:44px 38px; box-shadow:0 2px 12px rgba(21,35,15,0.07); text-align:center;">
+      <img src="assets/evidence-badge.png" alt="Built using evidence-based sports nutrition guidance" style="width:132px; height:132px; display:block; margin:0 auto 24px; filter:drop-shadow(0 6px 16px rgba(21,35,15,0.15));">
       <div style="font-family:'Oswald',sans-serif; font-size:clamp(22px, 3vw, 30px); font-weight:600; line-height:1.35; letter-spacing:0.5px; color:#15230f; max-width:720px; margin:0 auto;">"Half my squad used to turn up on a bag of sweets and a fizzy drink. Kikupz is the team-sheet for breakfast."</div>
       <div style="margin-top:14px; font-family:'Oswald',sans-serif; font-size:14px; font-weight:600; letter-spacing:3px; color:#4C9A2A; text-transform:uppercase;">Built by a grassroots football coach</div>
       <div style="margin-top:30px; display:flex; flex-wrap:wrap; justify-content:center; gap:14px 44px;">
@@ -249,19 +283,23 @@
     <div style="position:relative; max-width:680px; margin:0 auto; padding:74px 28px 80px; display:flex; flex-direction:column; align-items:center; text-align:center;">
       <img src="assets/kikupz-icon.webp" alt="Kikupz" style="width:64px; height:64px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.35);">
       <h2 style="margin:26px 0 0; font-family:'Oswald',sans-serif; font-size:clamp(30px, 5vw, 46px); font-weight:600; letter-spacing:1px; line-height:1.1; text-transform:uppercase;">Next match sorted<br>in 30 seconds</h2>
-      <a href="{{ appUrl }}" style="margin-top:34px; display:inline-flex; align-items:center; gap:14px; padding:22px 46px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
-        <span>{{ ctaLabel }}</span>
-        <span style="font-size:24px; line-height:1;">&#8594;</span>
-      </a>
-      <!-- QR ticket -->
-      <div style="margin-top:40px; position:relative; display:flex; align-items:center; gap:18px; padding:18px 26px 18px 18px; border-radius:20px; background:#ffffff; box-shadow:0 20px 50px rgba(0,0,0,0.45); text-align:left;">
-        <div style="position:absolute; top:-13px; left:22px; padding:5px 14px; border-radius:20px; background:#8BC53F; color:#0e3417; font-family:'Oswald',sans-serif; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Scan me</div>
-        <div style="width:132px; height:132px; flex:none;"><img src="assets/qr.png" alt="Scan to open Kikupz" style="width:100%; height:100%; display:block;"></div>
-        <div style="display:flex; flex-direction:column; gap:6px; max-width:150px;">
-          <div style="font-family:'Oswald',sans-serif; font-size:17px; font-weight:600; letter-spacing:1px; line-height:1.2; text-transform:uppercase; color:#0e3417;">Take it to the touchline</div>
-          <div style="font-size:13px; line-height:1.45; color:#4b5a44;">Scan with your phone camera to open Kikupz.</div>
+      <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:34px; display:flex; flex-direction:column; align-items:center; gap:18px;">
+          <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:14px; padding:22px 46px; border-radius:60px; background:linear-gradient(180deg, #FF9838 0%, #F5821F 55%, #E4650E 100%); color:#ffffff; font-family:'Oswald',sans-serif; font-size:22px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; animation:kkzPulse 2.6s ease-in-out infinite; transition:transform 0.15s ease;" style-hover="transform:translateY(-3px) scale(1.03);" style-active="transform:translateY(1px) scale(0.98);">
+            <span>{{ ctaLabel }}</span>
+            <span style="font-size:24px; line-height:1;">&#8594;</span>
+          </a>
+          <a href="{{ appUrl }}" style="display:inline-flex; align-items:center; gap:12px; padding:16px 38px; border-radius:60px; border:2px solid rgba(139,197,63,0.7); color:#c9e89a; font-family:'Oswald',sans-serif; font-size:18px; font-weight:600; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:background 0.15s ease;" style-hover="background:rgba(139,197,63,0.15);">Open App</a>
         </div>
-      </div>
+      </sc-if>
+      <!-- QR ticket (desktop only) -->
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:40px; position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; padding:30px 32px 26px; border-radius:24px; background:#ffffff; box-shadow:0 20px 50px rgba(0,0,0,0.45);">
+          <div style="position:absolute; top:-14px; left:28px; padding:5px 14px; border-radius:20px; background:#8BC53F; color:#0e3417; font-family:'Oswald',sans-serif; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; box-shadow:0 4px 12px rgba(0,0,0,0.25);">Scan me</div>
+          <div style="width:224px; height:224px;"><img src="assets/qr.png" alt="Scan to open Kikupz" style="width:100%; height:100%; display:block;"></div>
+          <div style="max-width:250px; text-align:center; font-family:'Oswald',sans-serif; font-size:16px; font-weight:600; letter-spacing:1px; line-height:1.45; text-transform:uppercase; color:#0e3417;">Scan the QR code to open Kikupz on your phone</div>
+        </div>
+      </sc-if>
 
       <div style="margin-top:36px; display:flex; align-items:center; gap:14px;">
         <div style="width:36px; height:2px; background:rgba(139,197,63,0.45);"></div>
@@ -278,53 +316,27 @@
   &quot;ctaLabel&quot;: { &quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;Get My Match Plan&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Call to action&quot; }
 }">
 class Component extends DCLogic {
-  heroQr = React.createRef();
-  footQr = React.createRef();
-
   componentDidMount() {
     /* QR codes are served as a static image (assets/qr.png); no runtime generation needed. */
   }
 
-  _mountQrCodes() {
-    const url = this.props.appUrl ?? "https://kikupz.glide.page";
-    const tryMount = () => {
-      if (!window.QRCodeStyling) { setTimeout(tryMount, 150); return; }
-      [this.heroQr, this.footQr].forEach((ref) => {
-        const el = ref.current;
-        if (!el || el.dataset.qrDone) return;
-        el.dataset.qrDone = "1";
-        const qr = new QRCodeStyling({
-          width: 280,
-          height: 280,
-          type: "canvas",
-          data: url,
-          margin: 0,
-          qrOptions: { errorCorrectionLevel: "H" },
-          image: "assets/kikupz-icon.webp",
-          imageOptions: { imageSize: 0.32, margin: 5, hideBackgroundDots: true },
-          dotsOptions: { type: "rounded", color: "#123a1b" },
-          cornersSquareOptions: { type: "extraRounded", color: "#0e3417" },
-          cornersDotOptions: { type: "dot", color: "#F5821F" },
-          backgroundOptions: { color: "#ffffff" }
-        });
-        qr.append(el);
-        const fitCanvas = () => {
-          const c = el.querySelector("canvas");
-          if (c) { c.style.width = "100%"; c.style.height = "100%"; c.style.display = "block"; }
-          else requestAnimationFrame(fitCanvas);
-        };
-        fitCanvas();
-      });
-    };
-    tryMount();
+  _isPhone() {
+    if (this._phoneCached === undefined) {
+      const ua = navigator.userAgent || "";
+      const uaMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+      const coarse = window.matchMedia ? matchMedia("(pointer: coarse)").matches : false;
+      this._phoneCached = uaMobile || coarse;
+    }
+    return this._phoneCached;
   }
 
   renderVals() {
+    const isPhone = this._isPhone();
     return {
+      isPhone: isPhone,
+      isDesktop: !isPhone,
       appUrl: this.props.appUrl ?? "https://kikupz.glide.page",
-      ctaLabel: this.props.ctaLabel ?? "Get My Match Plan",
-      heroQr: this.heroQr,
-      footQr: this.footQr
+      ctaLabel: this.props.ctaLabel ?? "Get My Match Plan"
     };
   }
 }
